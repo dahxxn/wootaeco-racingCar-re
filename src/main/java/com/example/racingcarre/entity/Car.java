@@ -1,5 +1,7 @@
 package com.example.racingcarre.entity;
 
+import com.example.racingcarre.view.OutputView;
+
 public class Car {
     String name;
     long distance;
@@ -12,5 +14,10 @@ public class Car {
     public long addDistance(){
         this.distance += 1;
         return this.distance;
+    }
+
+    public void printState(){
+        OutputView outputView = new OutputView();
+        outputView.printCarState(name, distance);
     }
 }
