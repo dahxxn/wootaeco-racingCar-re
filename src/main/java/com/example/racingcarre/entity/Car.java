@@ -20,4 +20,12 @@ public class Car {
         OutputView outputView = new OutputView();
         outputView.printCarState(name, distance);
     }
+
+    public long getDistance(){
+        return this.distance;
+    }
+
+    public String getName(){
+        return this.name;
+    }
 }
