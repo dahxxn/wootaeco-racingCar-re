@@ -3,7 +3,10 @@ package com.example.racingcarre.service;
 import camp.nextstep.edu.missionutils.Randoms;
 import com.example.racingcarre.entity.Car;
 import com.example.racingcarre.entity.TotalCar;
+import com.example.racingcarre.view.OutputView;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Racing {
     TotalCar cars;
@@ -15,6 +18,8 @@ public class Racing {
     }
 
     public void runRacing(){
+        OutputView outputView = new OutputView();
+        outputView.printMessage("실행결과");
         for(int i = 0; i < roundCounts; i++){
             runRound();
         }
@@ -39,5 +44,24 @@ public class Racing {
 
     private int generateRandomState(){
         return Randoms.pickNumberInRange(0,9);
+    }
+
+    public List<String> getWinners(){
+        List<String> winners = new ArrayList<>();
+        Iterator<Car> totalCars = cars.getAllCar();
+        long max = 0;
+        while(totalCars.hasNext()){
+            Car car = totalCars.next();
+            long currentDistance = car.getDistance();
+            if(currentDistance > max){
+                max = currentDistance;
+                winners.add(car.getName());
+                continue;
+            }
+            if(currentDistance == max){
+                winners.add(car.getName());
+            }
+        }
+        return winners;
     }
 }
