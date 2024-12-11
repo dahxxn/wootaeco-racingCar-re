@@ -4,6 +4,7 @@ import com.example.racingcarre.entity.Car;
 import com.example.racingcarre.entity.TotalCar;
 import com.example.racingcarre.error.CustomException;
 import com.example.racingcarre.error.ExceptionMessage;
+import com.example.racingcarre.service.Racing;
 import com.example.racingcarre.view.InputView;
 import com.example.racingcarre.view.OutputView;
 import java.util.ArrayList;
@@ -77,8 +78,13 @@ public class Controller {
 
         String rawRoundCountInput = inputView.readInput("시도할 횟수는 몇 회 인가요?");
         int roundCount = preprocessingRawRoundCount(rawRoundCountInput);
+
         // 자동차 경주 실행하기(매라운드 별 실행 결과 출력하기)
+        Racing racing = new Racing(cars, roundCount);
+        racing.runRacing();
 
         // 사용자에게 우승자 출력하기
+        List<String> winners = racing.getWinners();
+        outputView.printWinners(winners);
     }
 }
