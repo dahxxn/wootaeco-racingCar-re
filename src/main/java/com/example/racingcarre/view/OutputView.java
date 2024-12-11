@@ -2,6 +2,7 @@ package com.example.racingcarre.view;
 
 import com.example.racingcarre.entity.Car;
 import java.util.Iterator;
+import java.util.List;
 
 public class OutputView {
     public void printLineBreak() {
@@ -33,6 +34,26 @@ public class OutputView {
         String distanceVisual = makeLineByDistance(distance);
         System.out.printf(CAR_STATE_FORMAT,name, distanceVisual);
         printLineBreak();
+    }
+
+    public void printWinners(List<String> winners){
+        String WINNERS_FORMAT_HEAD = "최종 우승자 : ";
+        if(winners.size() == 1){
+            printMessage(WINNERS_FORMAT_HEAD + winners.getFirst());
+            return;
+        }
+        printMessage(makeLineByWinners(winners));
+    }
+
+    public String makeLineByWinners(List<String> winners){
+        String WINNERS_FORMAT_HEAD = "최종 우승자 : ";
+        StringBuilder sb = new StringBuilder(WINNERS_FORMAT_HEAD);
+        for(String winner : winners){
+            sb.append(winner);
+            sb.append(", ");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
     }
 
 }
